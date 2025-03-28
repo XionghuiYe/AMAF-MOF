@@ -84,7 +84,7 @@ def main(config):
     # Model Training & Evaluation
     print('\n ------ MEAN Training & Testing ------')
     # TP_spot, FP_spot, FN_spot, metric_final, gt_list, pred_list, gt_tp_list, asr_score, mae_score, gt_spot_list, pred_spot_list = train_test(X, y, X1, y1, X2, y2, dataset_name, emotion_class, groupsLabel, groupsLabel1, spot_multiple, final_subjects, final_emotions, final_samples, final_dataset_spotting, k, k_p, 'micro-expression', epochs_spot=10, epochs_recog=100, spot_lr=0.0005, recog_lr=0.0005, batch_size=32, ratio=5, p=0.55, spot_attempt=1, recog_attempt=1, train=train)
-    TP_spot, FP_spot, FN_spot, metric_final, gt_list, pred_list, gt_tp_list, asr_score, mae_score = pytorch_train_test(X, y, X1, y1, X2, y2, dataset_name, emotion_class, groupsLabel, groupsLabel1, spot_multiple, final_subjects, final_emotions, final_samples, final_dataset_spotting, k, k_p, 'micro-expression', epochs_spot=55, epochs_recog=165, spot_lr=0.0005, recog_lr=0.0005, batch_size=16, ratio=5, p=0.55, spot_attempt=1, recog_attempt=1, train_spot=False, train_recog=False)
+    TP_spot, FP_spot, FN_spot, metric_final, gt_list, pred_list, gt_tp_list, asr_score, mae_score = pytorch_train_test(X, y, X1, y1, X2, y2, dataset_name, emotion_class, groupsLabel, groupsLabel1, spot_multiple, final_subjects, final_emotions, final_samples, final_dataset_spotting, k, k_p, 'micro-expression', epochs_spot=55, epochs_recog=165, spot_lr=0.0005, recog_lr=0.0005, batch_size=16, ratio=5, p=0.55, spot_attempt=1, recog_attempt=1, train_spot=True, train_recog=True)
     #
     # Model Final Evaluation
     print('\n ------ MEAN Final Evaluation ------')
