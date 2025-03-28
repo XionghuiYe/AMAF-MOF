@@ -47,7 +47,6 @@ def pytorch_train_test(X, y, X1, y1, X2, y2, dataset_name, emotion_class, groups
     # 定义损失函数和优化器
     # 检测网络的MSE损失函数以及L2正则化weight_decay
     spot_criterion = nn.MSELoss()
-    adam_spot = optim.Adam(torch_mean_spot.parameters(), lr=0.0005)
     p_model_spot = torch_p_MEAN_Spot().cuda()
     q_model_spot = torch_q_model_spot().cuda()
     q_model_recog = torch_q_model_recog().cuda()
@@ -87,6 +86,8 @@ def pytorch_train_test(X, y, X1, y1, X2, y2, dataset_name, emotion_class, groups
     for subject_index in range(len(final_subjects)):
         subject_count += 1
         print('Index: ' + str(subject_count - 1) + ' | Subject : ' + str(final_subjects[subject_count - 1]))
+        torch_mean_spot = torch_MEAN_Spot().cuda()  # 重新实例化 Spotting 网络
+        torch_model_recog = torch_MEAN_Recog_TL().cuda()  # 重新实例化 Recognition 网络
 
         # Prepare training & testing data by loso splitting
         X_train, X_test = [X[i] for i in spot_train_index[subject_index]], [X[i] for i in spot_test_index[
@@ -168,7 +169,7 @@ def pytorch_train_test(X, y, X1, y1, X2, y2, dataset_name, emotion_class, groups
         # 识别网路的交叉熵损失函数以及L2正则化weight_decay
         recog_criterion = nn.CrossEntropyLoss()
         adam_recog = optim.Adam(torch_model_recog.parameters(), lr=recog_lr)
-
+        adam_spot = optim.Adam(torch_mean_spot.parameters(), lr=0.0005)
 
         if (len(X1_train) > 0):  # Check the subject has samples for recognition
             print('------ MEAN Recognition-------')  # Using transfer learning for recognition
